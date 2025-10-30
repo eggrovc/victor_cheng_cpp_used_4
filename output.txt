@@ -1,0 +1,39 @@
+x2, y3, x3, y1, x2
+
+# Running Time: 32 microseconds.
+
+c, b, a, c
+
+# Running Time: 19 microseconds.
+
+------------------------------------------------------
+
+Topological sorted nodes in sequence
+
+Edge (1, 2) -- Type: T (Tree)
+Edge (2, 3) -- Type: T (Tree)
+Edge (2, 7) -- Type: T (Tree)
+Edge (7, 3) -- Type: C (Cross)
+Edge (1, 4) -- Type: T (Tree)
+Edge (4, 8) -- Type: T (Tree)
+Edge (1, 7) -- Type: F (Forward)
+Edge (5, 2) -- Type: C (Cross)
+Edge (5, 3) -- Type: C (Cross)
+Edge (6, 2) -- Type: C (Cross)
+Edge (6, 4) -- Type: C (Cross)
+Edge (6, 5) -- Type: C (Cross)
+
+
+6 5 1 4 8 2 7 3 
+
+# Running Time: 
+765 microseconds.
+
+--------------------------
+
+Minimum Semesters Required: 5
+
+# Running Time: 
+641 microseconds.
+------------------------------------------------------
+

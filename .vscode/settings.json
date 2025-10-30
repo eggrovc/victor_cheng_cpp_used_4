@@ -1,0 +1,26 @@
+{
+  "files.associations": {
+    "algorithm": "cpp",
+    "__node_handle": "cpp",
+    "cmath": "cpp",
+    "vector": "cpp",
+    "sstream": "cpp",
+    "ostream": "cpp",
+    "iosfwd": "cpp",
+    "chrono": "cpp",
+    "fstream": "cpp",
+    "iostream": "cpp",
+    "map": "cpp",
+    "__tree": "cpp",
+    "utility": "cpp",
+    "deque": "cpp",
+    "list": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "functional": "cpp",
+    "set": "cpp"
+  },
+  "C_Cpp.intelliSenseCacheSize": 0,
+  "C_Cpp.intelliSenseMemoryLimit": 256,
+  "terminal.integrated.enablePersistentSessions": false
+}
