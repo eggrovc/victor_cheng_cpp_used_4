@@ -15,6 +15,21 @@ using namespace std;
 #include <set>
 #include <algorithm>
 
+struct coordinates{
+    double x = 0;
+    double y = 0;
+
+    coordinates() {
+        x = 0;
+        y = 0;
+    }
+
+    coordinates(double x1, double y1) {
+        x = x1;
+        y = y1;
+    }
+
+};
 
 // Implement graph instances here and use them in main.cpp
 class Proj4{
@@ -26,6 +41,7 @@ class Proj4{
         void readFileChar(const string& file);
         void readFileInt(const string& file);
         void readFileStrQ10(const string& file);
+        void readFilelp(const string& file);
 
         void print(ofstream& outFile);
         void printInt(ofstream& outFile);
@@ -40,24 +56,38 @@ class Proj4{
         void classifyEdges(ofstream& outFile);
         void dfs(ofstream& outFile, int u);
         
-        // Q 11 Stuff
+        // Q10 Stuff
         void q10(const string& file, ofstream& outFile);
 
+        // Q11 Stuff
         void qlp(const string& file, ofstream& outFile);
+        void graphicalSol(ofstream& outFile);
        
     private: 
         // Global for Q5
         set<int> allNodes;  // So it can be unique
-        map<int, int> visited;  // 0 = white, 1 = gray, 2 = black
-        map<int, int> discoveryTime;
-        map<int, int> finishTime;
-        vector<int> topOrder;
 
+        vector<int> visited;    // 0 = white, 1 = gray, 2 = black
+        vector<int> discoveryTime;
+        vector<int> finishTime;
+
+        // map<int, int> visited;  // 0 = white, 1 = gray, 2 = black
+        // map<int, int> discoveryTime;
+        // map<int, int> finishTime;
+
+        vector<int> topOrder;
         int totalTime;
 
         // Q 10
         map<string, int> found;
         int q10Dfs(ofstream& outFile, const string& course);
+
+        // Q 11
+        string operation;
+        vector<double> costs;
+        vector<vector<double>> matrix; 
+
+
 
         // Graphs
         map<string, vector<string>> stringGraph;

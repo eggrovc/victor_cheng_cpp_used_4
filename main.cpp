@@ -74,15 +74,15 @@ int main (int argc, char* argv[]) {
 
     outFile << "------------------------------------------------------" << endl << endl;
 
-    // // Qlp
-    // start = chrono::high_resolution_clock::now();
+    // Qlp
+    start = chrono::high_resolution_clock::now();
 
-    // qlp.qlp(lptxt, outFile);
+    qlp.qlp(lptxt, outFile);
      
-    // end = chrono::high_resolution_clock::now();
-    // duration = chrono::duration_cast<chrono::microseconds>(end - start);
+    end = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::microseconds>(end - start);
     
-    // outFile << endl << "//** print out running time **//" << endl << duration.count() << " microseconds.";
+    outFile << endl << "# Running Time: " << endl << duration.count() << " microseconds.";
 
 
     return 0;

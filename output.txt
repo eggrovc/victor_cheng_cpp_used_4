@@ -1,10 +1,10 @@
 x2, y3, x3, y1, x2
 
-# Running Time: 32 microseconds.
+# Running Time: 73 microseconds.
 
 c, b, a, c
 
-# Running Time: 19 microseconds.
+# Running Time: 13 microseconds.
 
 ------------------------------------------------------
 
@@ -27,13 +27,20 @@ Edge (6, 5) -- Type: C (Cross)
 6 5 1 4 8 2 7 3 
 
 # Running Time: 
-765 microseconds.
+1316 microseconds.
 
 --------------------------
 
 Minimum Semesters Required: 5
 
 # Running Time: 
-641 microseconds.
+884 microseconds.
 ------------------------------------------------------
 
+Minimum Cost: 0.66
+# of X drinks: 3
+# of Y drinks: 2
+
+
+# Running Time: 
+701 microseconds.

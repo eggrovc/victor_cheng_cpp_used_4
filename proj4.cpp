@@ -95,14 +95,26 @@ void Proj4::q5(const string& file, ofstream& outFile){
 }
 
 void Proj4::classifyEdges(ofstream& outFile) {
-    // 1. Initialize all nodes
+    // Initialize all nodes
     totalTime = 0;
     topOrder.clear();
+    int numNode = 0;
+
     for (int node : allNodes) {
-        visited[node] = 0;
-        discoveryTime[node] = 0;
-        finishTime[node] = 0;
+        if (node > numNode) {
+            numNode = node;
+        }
     }
+
+    visited.assign(numNode + 1, 0);
+    discoveryTime.assign(numNode + 1, 0);
+    finishTime.assign(numNode + 1, 0);
+
+    // for (int node : allNodes) {
+    //     visited[node] = 0;
+    //     discoveryTime[node] = 0;
+    //     finishTime[node] = 0;
+    // }
 
     outFile << "Topological sorted nodes in sequence" << endl << endl;
     for (int node : allNodes) {
@@ -187,12 +199,6 @@ int Proj4::q10Dfs(ofstream& outFile, const string& course) {
     return found[course];
 }
 
-
-// void Proj4::qlp(const string& file, ofstream& outFile){
-
-
-// }
-
 // Helper Functions
 void Proj4::readFileStr(const string& file) {
     ifstream currFile(file);
@@ -200,7 +206,7 @@ void Proj4::readFileStr(const string& file) {
 
     while (getline(currFile, currLine)) {
         if (currLine.empty()) {
-            break;;
+            break;
         }
         stringstream line(currLine);
         string u, v;
@@ -235,7 +241,6 @@ void Proj4::readFileChar(const string& file) {
         }
 }
 
-// Q5
 void Proj4::readFileInt(const string& file) {
     ifstream currFile(file);
     string currLine;
@@ -264,7 +269,9 @@ void Proj4::readFileStrQ10(const string& file) {
         }
         stringstream line(currLine);
         string u, v;
-        
+
+        // line >> u >> v;
+        // this->dAddEdge(u, v);
         if (line >> u >> v) {
             this->dAddEdge(u, v);
             
@@ -274,6 +281,7 @@ void Proj4::readFileStrQ10(const string& file) {
     }
 }
 
+// Helper functions
 void Proj4::print(ofstream& outFile) {
 
     for (const auto& pair : stringGraph) {
@@ -301,5 +309,110 @@ void Proj4::printInt(ofstream& outFile) {
     }
 
     outFile << endl;
+
+}
+
+// Q11
+void Proj4::qlp(const string& file, ofstream& outFile){
+    readFilelp(file);
+    graphicalSol(outFile);
+}
+
+coordinates intersection(double x1, double y1, double z, double x2, double y2, double z2) {
+    double num = x1 * y2 - x2 * y1;
+
+    if (num == 0) {
+        return {-1, -1};
+    }
+
+    double x = (z * y2 - z2 * y1) / num;
+    double y = (x1 * z2 - x2 * z) / num;
+    return {x, y};
+}
+
+bool check(vector<vector<double>> matrix, double x, double y) {
+    for (int i = 0; i < (int)matrix.size(); i++) {
+        double aCoef = matrix[i][0];
+        double bCoef = matrix[i][1];
+        double cCoef = matrix[i][2];
+
+        if(aCoef * x + bCoef * y < cCoef) { 
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void Proj4::graphicalSol(ofstream& outFile) {
+    vector<coordinates> totalSolutions;
+
+    for(int i = 0; i < (int)matrix.size(); i++) {
+        for(int j = i + 1 ; j < (int)matrix.size();j ++) {
+            coordinates solution = intersection(matrix[i][0], matrix[i][1], matrix[i][2], matrix[j][0], matrix[j][1], matrix[j][2]);
+
+            if (check(matrix, solution.x,solution.y)) {
+                totalSolutions.push_back(solution);
+
+            }
+        }
+    }
+    
+    coordinates minCoord;
+    double min = 1e8;
+
+    for (int i = 0 ; i < (int)totalSolutions.size(); i++) {
+        double cost = costs[0] * totalSolutions[i].x + costs[1] * totalSolutions[i].y;
+        if (cost < min) {
+            min = cost;
+            minCoord = totalSolutions[i];
+        }
+    }
+    outFile << "Minimum Cost: "<< min << endl;
+    outFile << "# of X drinks: "<< minCoord.x << endl;
+    outFile << "# of Y drinks: "<< minCoord.y << endl << endl;
+
+
+}
+
+void Proj4::readFilelp(const string& file) {
+    ifstream currFile(file);
+    string currLine;
+    int counter = 0;
+
+    while (getline(currFile, currLine)) {
+        if (currLine.empty()) {
+            if (counter < 3) {
+                counter++;
+            }
+            continue;
+        }
+        stringstream line(currLine);
+
+        if (counter == 0) {
+        
+            line >> this->operation;
+        } 
+        else if (counter == 1) {
+            
+            double costValue;
+            while (line >> costValue) {
+                this->costs.push_back(costValue);
+            }
+        } 
+        else if (counter == 2) {
+        
+            vector<double> row;
+            double matrixVal;
+
+            while (line >> matrixVal) {
+                row.push_back(matrixVal);
+            }
+
+            if (!row.empty()) {
+                this->matrix.push_back(row);
+            }
+        }
+    }
 
 }
