@@ -64,3 +64,6 @@ Running Time:
 # Pseudo Code Explanation
 
 ## Results
+Minimum Cost: $0.66
+Cups of Drink X: 3
+Cups of Drink Y: 2
